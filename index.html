@@ -1,1 +1,172 @@
 
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PorpleLink — Video Packs</title>
+  <meta name="description" content="Buy exclusive video packs — modern design, responsive and PayPal ready." />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f1020;
+      --surface:#0b0b12;
+      --muted:#9aa3b2;
+      --accent-1:#7C3AED;
+      --card-radius:18px;
+      --max-width:1100px;
+      --gap:18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;font-family:Inter,system-ui;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.08), transparent),
+                  linear-gradient(180deg,#05050a 0%, #0b0b12 100%);
+      color:#e6eef8;
+      display:flex;justify-content:center;padding:32px 20px;
+    }
+
+    .container{width:100%;max-width:var(--max-width);display:flex;flex-direction:column;gap:28px;align-items:center;}
+
+    header{
+      width:100%;background:linear-gradient(135deg,rgba(124,58,237,0.14),rgba(16,185,129,0.06));
+      border-radius:22px;padding:36px 28px;
+      display:flex;flex-direction:column;align-items:center;gap:10px;
+      box-shadow:0 6px 20px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      backdrop-filter:blur(6px);
+    }
+
+    .brand{font-family:Poppins;font-weight:800;font-size:clamp(28px,6vw,48px);letter-spacing:-1px;
+      background:linear-gradient(90deg,var(--accent-1),#23c4b0);-webkit-background-clip:text;color:transparent;text-align:center;}
+    .tagline{color:var(--muted);font-size:14px;text-align:center;max-width:820px;}
+
+    .grid{width:100%;display:grid;gap:var(--gap);grid-template-columns:repeat(1,1fr);}
+    @media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
+    @media(min-width:1100px){.grid{grid-template-columns:repeat(5,1fr)}}
+
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      border-radius:var(--card-radius);padding:18px;display:flex;flex-direction:column;align-items:center;gap:12px;
+      box-shadow:0 8px 24px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03);
+      transition:transform .25s ease,box-shadow .25s ease;}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(15,20,40,0.6);}
+    .card .size{font-family:Poppins;font-size:18px;font-weight:700;color:#fff;text-align:center;}
+    .card .desc{color:var(--muted);font-size:13px;text-align:center;}
+    .price{font-weight:800;font-size:20px;color:#fff;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.03);}
+    .buy{display:inline-block;margin-top:8px;padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;text-align:center;
+      font-size:15px;min-width:120px;transition:transform .15s ease,box-shadow .15s ease;
+      box-shadow:0 6px 18px rgba(11,12,20,0.6);background:linear-gradient(90deg,var(--accent),rgba(0,0,0,0.1));color:#fff;}
+    .buy:hover{box-shadow:0 12px 30px rgba(2,6,23,0.6);transform:translateY(-4px);}
+    .c-1{--accent:#06b6d4}.c-2{--accent:#7c3aed}.c-3{--accent:#f97316}.c-4{--accent:#ef4444}.c-5{--accent:#10b981}
+    .accent-bar{height:6px;width:70%;border-radius:999px;background:linear-gradient(90deg,var(--accent),rgba(255,255,255,0.06));}
+
+    footer{width:100%;display:flex;flex-direction:column;gap:12px;align-items:center;padding:18px 22px;border-radius:16px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);color:var(--muted);font-size:14px;
+      border:1px solid rgba(255,255,255,0.02);}
+    .trust{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;}
+    .trust svg{width:20px;height:20px;opacity:0.95}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* Visitor Counter */
+    #visitor-counter{
+      position:fixed;top:12px;right:12px;background:rgba(255,255,255,0.05);
+      border-radius:20px;padding:6px 12px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.4);backdrop-filter:blur(6px);
+    }
+
+    /* Telegram Button */
+    #telegram-btn{
+      position:fixed;bottom:20px;right:20px;width:56px;height:56px;
+      border-radius:50%;background:linear-gradient(135deg,#0088cc,#34ace0);
+      display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.5);
+      transition:transform .2s ease;z-index:20;
+    }
+    #telegram-btn:hover{transform:scale(1.1);}
+    #telegram-btn svg{width:28px;height:28px;fill:#fff;}
+
+    /* Testimonials */
+    #testimonials{
+      position:fixed;bottom:20px;left:20px;display:flex;flex-direction:column;gap:8px;z-index:15;
+    }
+    .testimonial{
+      display:flex;align-items:center;gap:8px;
+      background:rgba(255,255,255,0.05);padding:8px 12px;
+      border-radius:14px;font-size:12px;max-width:220px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.4);backdrop-filter:blur(6px);
+      opacity:0;transform:translateY(20px);transition:all .5s ease;
+    }
+    .testimonial.show{opacity:1;transform:translateY(0);}
+    .testimonial img{width:28px;height:28px;border-radius:50%;object-fit:cover;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">PorpleLink</div>
+      <div class="tagline">BEST VIDEOS C🅿️ VERY RARE!! BUY NOW WITH GREATER SECURITY</div>
+    </header>
+
+    <main style="width:100%;">
+      <section class="grid" aria-label="Video Packs">
+        <article class="card c-1"><div class="accent-bar"></div><div class="size">Common Pack</div><div class="desc">Common rarity — lots of good videos.</div><div class="price">$5</div><a class="buy" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=gorilaodapeste@gmail.com&item_name=Common+Pack&amount=5&currency_code=USD" target="_blank">Buy Now</a></article>
+        <article class="card c-2"><div class="accent-bar"></div><div class="size">Rare Pack</div><div class="desc">Rare rarity — packed with quality videos.</div><div class="price">$10</div><a class="buy" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=gorilaodapeste@gmail.com&item_name=Rare+Pack&amount=10&currency_code=USD" target="_blank">Buy Now</a></article>
+        <article class="card c-3"><div class="accent-bar"></div><div class="size">Epic Pack</div><div class="desc">Epic rarity — a bigger collection of amazing videos.</div><div class="price">$40</div><a class="buy" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=gorilaodapeste@gmail.com&item_name=Epic+Pack&amount=40&currency_code=USD" target="_blank">Buy Now</a></article>
+        <article class="card c-4"><div class="accent-bar"></div><div class="size">Legendary Pack</div><div class="desc">Legendary rarity — exclusive videos, top quality.</div><div class="price">$65</div><a class="buy" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=gorilaodapeste@gmail.com&item_name=Legendary+Pack&amount=65&currency_code=USD" target="_blank">Buy Now</a></article>
+        <article class="card c-5"><div class="accent-bar"></div><div class="size">Mythic Pack</div><div class="desc">Mythic rarity — ultimate collection, tons of rare videos.</div><div class="price">$120</div><a class="buy" href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=gorilaodapeste@gmail.com&item_name=Mythic+Pack&amount=120&currency_code=USD" target="_blank">Buy Now</a></article>
+      </section>
+    </main>
+
+    <footer>
+      <div class="trust">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 15a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" fill="currentColor"></path><path d="M7 10V8a5 5 0 0110 0v2" stroke="currentColor" stroke-width="0.6"/></svg>
+        <div class="small">This is a secure site. Payments are processed through PayPal and you will instantly get access to your video pack after purchase.</div>
+      </div>
+      <div class="small">Security icons shown as visual trust. Payments fully handled by PayPal checkout.</div>
+    </footer>
+  </div>
+
+  <!-- Visitor Counter -->
+  <div id="visitor-counter">👥 <span id="count">1532</span> Online</div>
+
+  <!-- Telegram Button -->
+  <a id="telegram-btn" href="https://t.me/PorpleLink" target="_blank" aria-label="Contact on Telegram">
+    <svg viewBox="0 0 24 24"><path d="M9.5 15.6l-.4 5.2c.6 0 .9-.3 1.2-.7l2.9-2.8 5.9 4.3c1 .5 1.7.2 2-.9l3.6-16.9c.3-1.1-.4-1.5-1.2-1.2L1.7 10.1c-1.1.4-1.1 1-.2 1.3l5.5 1.7L19.1 5c.5-.3.9-.1.6.2"/></svg>
+  </a>
+
+  <!-- Testimonials -->
+  <div id="testimonials"></div>
+
+  <script>
+    // Fake Visitor Counter
+    let count = 1532;
+    setInterval(()=>{count+=Math.floor(Math.random()*3);document.getElementById("count").textContent=count;},5000);
+
+    // Testimonials rotation
+    const testimonials = [
+      {text:"Great service! Received my pack instantly.", img:"https://randomuser.me/api/portraits/men/32.jpg"},
+      {text:"Fast PayPal checkout, very smooth.", img:"https://randomuser.me/api/portraits/women/45.jpg"},
+      {text:"Highly recommended, worth it!", img:"https://randomuser.me/api/portraits/men/12.jpg"},
+      {text:"Awesome quality videos!", img:"https://randomuser.me/api/portraits/women/26.jpg"}
+    ];
+    let index = 0;
+    function showTestimonial(){
+      const t = testimonials[index];
+      const div = document.createElement("div");
+      div.className="testimonial";
+      div.innerHTML=`<img src="${t.img}" alt=""><span>${t.text}</span>`;
+      document.getElementById("testimonials").appendChild(div);
+      setTimeout(()=>div.classList.add("show"),50);
+      setTimeout(()=>{
+        div.classList.remove("show");
+        setTimeout(()=>div.remove(),500);
+      },5000);
+      index=(index+1)%testimonials.length;
+    }
+    setInterval(showTestimonial,6000);
+    showTestimonial();
+  </script>
+</body>
+</html>
