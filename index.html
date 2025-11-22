@@ -11,294 +11,291 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@500;700&display=swap">
   </noscript>
   <style>
-    :root {
-      --bg: #0f1020;
-      --surface: #0b0b12;
-      --muted: #9aa3b2;
-      --accent-1: #7C3AED;
-      --card-radius: 18px;
-      --max-width: 1100px;
-      --gap: 18px;
-    }
-    * { box-sizing: border-box }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.08), transparent), linear-gradient(180deg,#05050a 0%, #0b0b12 100%);
-      color: #e6eef8;
-      display: flex;
-      justify-content: center;
-      padding: 32px 10px;
-      min-height: 100vh;
-    }
-    .container {
-      width: 100%;
-      max-width: var(--max-width);
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-      align-items: center;
-    }
-    header {
-      width: 100%;
-      background: linear-gradient(135deg,rgba(124,58,237,0.14),rgba(16,185,129,0.06));
-      border-radius: 22px;
-      padding: 36px 28px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 6px 20px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
-      backdrop-filter: blur(6px);
-    }
-    .brand {
-      font-family: Poppins,sans-serif;
-      font-weight: 800;
-      font-size: clamp(28px,6vw,48px);
-      letter-spacing: -1px;
-      background: linear-gradient(90deg,var(--accent-1),#23c4b0);
-      -webkit-background-clip:text; background-clip:text; color: transparent; text-align:center;
-    }
-    .tagline { color: var(--muted); font-size: 15px; text-align:center; max-width:820px; }
-    nav { width:100%; display:flex; justify-content:center; }
-    .grid { width:100%; display:grid; gap:var(--gap); grid-template-columns:repeat(1,1fr); }
-    @media(min-width:700px) { .grid { grid-template-columns:repeat(3,1fr);} }
-    @media(min-width:1100px) { .grid { grid-template-columns:repeat(5,1fr);} }
-    @media(max-width:500px) { .grid { grid-template-columns:1fr;} }
-    .card {
-      background: linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
-      border-radius: var(--card-radius);
-      padding:18px; display:flex; flex-direction:column; align-items:center; gap:12px;
-      box-shadow:0 8px 24px rgba(2,6,23,0.4); border:1px solid rgba(255,255,255,0.03);
-      transition:.25s cubic-bezier(.4,.2,.2,.9);
-    }
-    .card:hover,.card:focus-within { transform:translateY(-8px) scale(1.03); box-shadow:0 18px 40px rgba(15,20,40,.6); }
-    .card .size { font-family:Poppins,sans-serif;font-size:18px;font-weight:700;color:#fff;text-align:center; }
-    .card .desc { color:var(--muted);font-size:13px;text-align:center;min-height:36px; }
-    .price { font-weight:800;font-size:20px;color:#fff;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.03); }
-    .buy {
-      display:inline-block;margin-top:8px;padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;text-align:center;font-size:15px;min-width:120px;
-      transition:.15s cubic-bezier(.4,.2,.2,.9);box-shadow:0 6px 18px rgba(11,12,20,.6);background:linear-gradient(90deg,var(--accent),rgba(0,0,0,.1));color:#fff;outline:none;border:none;cursor:pointer
-    }
-    .buy:hover,.buy:focus-visible {box-shadow:0 12px 30px rgba(2,6,23,.6);transform:translateY(-4px) scale(1.04);}
-    .buy:active {transform:scale(.97);}
-    .c-1 {--accent:#06b6d4}
-    .c-2 {--accent:#7c3aed}
-    .c-3 {--accent:#f97316}
-    .c-4 {--accent:#ef4444}
-    .c-5 {--accent:#10b981}
-    .accent-bar { height:6px;width:70%;border-radius:999px;background: linear-gradient(90deg,var(--accent),rgba(255,255,255,.06)); margin-bottom:-4px }
-    footer {
-      width:100%;display:flex;flex-direction:column;gap:12px;align-items:center;padding:18px 22px;border-radius:16px;background:
-        linear-gradient(180deg,rgba(255,255,255,.01),transparent);color:
-        var(--muted);font-size:14px;border:
-        1px solid rgba(255,255,255,.02);margin-top:auto
-    }
-    .trust { display:flex;gap:10px;align-items:center;flex-wrap:
-        wrap;justify-content:center }
-    .trust img,.trust svg {width:22px;height:22px;opacity:.95}
-    .small {font-size:13px;color:
-        var(--muted)}
-    /* Visitor Counter */
-    #visitor-counter {
-      position:fixed;top:12px;right:12px;background:
-        rgba(255,255,255,.05);border-radius:
-        20px;padding:
-        6px 12px;font-size:
-        13px;font-weight:
-        600;display:flex;align-items:center;gap:
-        6px;box-shadow:
-        0 4px 14px rgba(0,0,0,.4);backdrop-filter:
-        blur(6px);z-index:
-        30
-    }
-    /* Telegram Button */
-    #telegram-btn {
-      position:
-        fixed;bottom:
-        20px;right:
-        20px;width:
-        56px;height:
-        56px;border-radius:
-        50%;background:
-        linear-gradient(135deg,#0088cc,#34ace0);display:flex;align-items:center;justify-content:center;box-shadow:
-        0 8px 20px rgba(0,0,0,.5);transition:.2s cubic-bezier(.4,.2,.2,.9);z-index:
-        20
-    }
-    #telegram-btn:hover,#telegram-btn:focus-visible {transform:
-        scale(1.1);}
-    #telegram-btn svg {width:
-        28px;height:
-        28px;fill:#fff;}
-    /* Testimonials */
-    #testimonials {
-      position:
-        fixed;bottom:
-        20px;left:
-        20px;display:flex;flex-direction:
-        column;gap:
-        8px;z-index:
-        15
-    }
-    .testimonial {
-      display:flex;align-items:center;gap:
-        8px;background:
-        rgba(255,255,255,.05);padding:
-        8px 12px;border-radius:
-        14px;font-size:
-        12px;max-width:
-        220px;box-shadow:
-        0 4px 12px rgba(0,0,0,.4);backdrop-filter:
-        blur(6px);opacity:
-        0;transform:
-        translateY(20px);transition:.5s cubic-bezier(.4,.2,.2,.9)
-    }
-    .testimonial.show {opacity:
-        1;transform:
-        translateY(0);}
-    .testimonial img {width:
-        28px;height:
-        28px;border-radius:
-        50%;object-fit:
-        cover;}
-    /* Accessibility focus */
-    a,
-    button,
-    .buy {
-      outline:none
-    }
-    a:focus-visible,
-    button:focus-visible,
-    .buy:focus-visible {
-      outline:auto
-    }
-    /* Hide scrollbars for testimonials on mobile */
-    @media (max-width:600px) {
-      #testimonials {left:auto;right:auto;width:auto;}
-      .testimonial {max-width:none;}
-      #visitor-counter {font-size:.95em;}
-      #telegram-btn {width:48px;height:48px;}
-      #telegram-btn svg {width:22px;height:22px;}
-    }
-    /* CSS Reset for better compatibility */
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    
-    /* Auth screens */
-    #auth-bg {
-      position:absolute;
-      inset:0;
-      z-index:10000;
-      background:#090a17e6;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
-      min-width:100vw;
-      transition:.3s opacity cubic-bezier(.4,.2,.2,.9);
-    }
-    #auth-card {
-      background:#18192a;
-      border-radius:22px;
-      box-shadow:0 8px 32px rgba(10,10,30,.7);
-      padding:38px clamp(18vw,7vw,60vw) clamp(18vw,7vw,60vw) clamp(18vw,7vw,60vw);
-      min-width:min(340px,90vw);
-      max-width:min(380px,96vw);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:22px;
-      animation:.5s fadeIn cubic-bezier(.4,.2,.2,.9);
-    }
-    @keyframes fadeIn{from{opacity:.3}to{opacity:1}}
-    
-    #auth-card h2 {
-      font-family:Poppins,sans-serif;font-weight:bold;font-size:min(32px,7vw);margin-bottom:-10px;color:#fff;text-align:center
-    }
-    
-    #auth-card form {
-      width:min(320px,90vw);
-      display:flex;
-      flex-direction:column;
-      gap:.9em
-    }
-    
-    #auth-card input[type="text"],#auth-card input[type="password"]{
-      padding:.85em .9em;border-radius:.7em;border:none;background:#23243a;color:#fff;font-size:.98em;margin-bottom:.3em
-    }
-    
-    #auth-card input[type="text"]:focus,#auth-card input[type="password"]:focus{outline:auto}
-    
-    #auth-card button{
-      padding:.85em;font-weight:bold;border-radius:.7em;background:#7C3AED;color:#fff;border:none;font-size:.98em;margin-top:.3em;cursor:pointer
-    }
-    
-    #auth-card button:hover{background:#5f27cd}
-    
-    #auth-card .switch{
-     color:#aaa;font-size:.97em;margin-top:.5em;text-align:center
-   }
-   #auth-card .switch a{color:#7C3AED;text-decoration:none;font-weight:bold}
-   #auth-card .switch a:hover{text-decoration:underline}
-   #auth-error{
-     color:#ef4444;font-size:.97em;text-align:center;margin-bottom:-10px
-   }
-
-   /* Hide main content when not logged in */
-   body:not(.logged-in) .container,
-   body:not(.logged-in) footer,
-   body:not(.logged-in) #visitor-counter,
-   body:not(.logged-in) #telegram-btn,
-   body:not(.logged-in) #testimonials
-   {display:none !important}
-   body:not(.logged-in) #auth-bg{display:flex}
-   body.logged-in #auth-bg{display:none !important}
-   
-   /* User menu */
-   #user-menu{
-     position:absolute;top:.7em;left:.7em;background:#23243a;border-radius:.9em;padding:.5em .9em;color:#fff;font-size:.98em;font-weight:bold;z-index:99
-   }
-   #user-menu button{
-     background:none;border:none;color:#ef4444;font-weight:bold;margin-left:.7em;font-size:.98em;text-decoration:none;padding:.2em .5em;border-radius:.5em;cursor:pointer
-   }
-   #user-menu button:hover{background:#18192a}
-   
-   @media(max-width:500px){
-     #auth-card{min-width:min(96vw);}
-     #user-menu{font-size:.93em;padding:.35em .7em;}
-   }
-
- </style>
+:root {
+  --bg: #0f1020;
+  --surface: #0b0b12;
+  --muted: #9aa3b2;
+  --accent-1: #7C3AED;
+  --card-radius: 18px;
+  --max-width: 1100px;
+  --gap: 18px;
+}
+* { box-sizing: border-box }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Arial, sans-serif;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.08), transparent), linear-gradient(180deg,#05050a 0%, #0b0b12 100%);
+  color: #e6eef8;
+  display: flex;
+  justify-content: center;
+  padding: 32px 10px;
+  min-height: 100vh;
+}
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
+}
+header {
+  width: 100%;
+  background: linear-gradient(135deg,rgba(124,58,237,0.14),rgba(16,185,129,0.06));
+  border-radius: 22px;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  backdrop-filter: blur(6px);
+}
+.brand {
+  font-family: Poppins,sans-serif;
+  font-weight: 800;
+  font-size: clamp(28px,6vw,48px);
+  letter-spacing: -1px;
+  background: linear-gradient(90deg,var(--accent-1),#23c4b0);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color: transparent;
+  text-align:center;
+}
+.tagline {
+  color: var(--muted);
+  font-size: 15px;
+  text-align:center;
+  max-width:820px;
+}
+nav { width:100%; display:flex; justify-content:center; }
+.grid {
+  width:100%;
+  display:grid;
+  gap:var(--gap);
+  grid-template-columns:repeat(1,1fr);
+}
+@media(min-width:700px) { .grid { grid-template-columns:repeat(3,1fr);}}
+@media(min-width:1100px) { .grid { grid-template-columns:repeat(5,1fr);}}
+@media(max-width:500px) { .grid { grid-template-columns:1fr;}}
+.card {
+  background: linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+  border-radius: var(--card-radius);
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 8px 24px rgba(2,6,23,0.4);
+  border:1px solid rgba(255,255,255,0.03);
+  transition:.25s cubic-bezier(.4,.2,.2,.9);
+}
+.card:hover,.card:focus-within {
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:0 18px 40px rgba(15,20,40,.6);
+}
+.card .size { font-family:Poppins,sans-serif;font-size:18px;font-weight:700;color:#fff;text-align:center; }
+.card .desc { color:var(--muted);font-size:13px;text-align:center;min-height:36px; }
+.price { font-weight:800;font-size:20px;color:#fff;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.03); }
+.buy {
+  display:inline-block;margin-top:8px;padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none;text-align:center;font-size:15px;min-width:120px;
+  transition:.15s cubic-bezier(.4,.2,.2,.9);box-shadow:0 6px 18px rgba(11,12,20,.6);background:linear-gradient(90deg,var(--accent),rgba(0,0,0,.1));color:#fff;outline:none;border:none;cursor:pointer
+}
+.buy:hover,.buy:focus-visible {box-shadow:0 12px 30px rgba(2,6,23,.6);transform:translateY(-4px) scale(1.04);}
+.buy:active {transform:scale(.97);}
+.c-1 {--accent:#06b6d4}
+.c-2 {--accent:#7c3aed}
+.c-3 {--accent:#f97316}
+.c-4 {--accent:#ef4444}
+.c-5 {--accent:#10b981}
+.accent-bar { height:6px;width:70%;border-radius:999px;background: linear-gradient(90deg,var(--accent),rgba(255,255,255,.06)); margin-bottom:-4px }
+footer {
+  width:100%;display:flex;flex-direction:column;gap:12px;align-items:center;padding:18px 22px;border-radius:16px;background: linear-gradient(180deg,rgba(255,255,255,.01),transparent);color: var(--muted);font-size:14px;border: 1px solid rgba(255,255,255,.02);margin-top:auto
+}
+.trust { display:flex;gap:10px;align-items:center;flex-wrap: wrap;justify-content:center }
+.trust img,.trust svg {width:22px;height:22px;opacity:.95}
+.small {font-size:13px;color: var(--muted)}
+/* Visitor Counter */
+#visitor-counter {
+  position:fixed;top:12px;right:12px;background: rgba(255,255,255,.05);border-radius: 20px;padding: 6px 12px;font-size: 13px;font-weight: 600;display:flex;align-items:center;gap: 6px;box-shadow: 0 4px 14px rgba(0,0,0,.4);backdrop-filter: blur(6px);z-index: 30
+}
+/* Telegram Button */
+#telegram-btn {
+  position: fixed;bottom: 20px;right: 20px;width: 56px;height: 56px;border-radius: 50%;background: linear-gradient(135deg,#0088cc,#34ace0);display:flex;align-items:center;justify-content:center;box-shadow: 0 8px 20px rgba(0,0,0,.5);transition:.2s cubic-bezier(.4,.2,.2,.9);z-index: 20
+}
+#telegram-btn:hover,#telegram-btn:focus-visible {transform: scale(1.1);}
+#telegram-btn svg {width: 28px;height: 28px;fill:#fff;}
+/* Testimonials */
+#testimonials {
+  position: fixed;bottom: 20px;left: 20px;display:flex;flex-direction: column;gap: 8px;z-index: 15
+}
+.testimonial {
+  display:flex;align-items:center;gap: 8px;background: rgba(255,255,255,.05);padding: 8px 12px;border-radius: 14px;font-size: 12px;max-width: 220px;box-shadow: 0 4px 12px rgba(0,0,0,.4);backdrop-filter: blur(6px);opacity: 0;transform: translateY(20px);transition:.5s cubic-bezier(.4,.2,.2,.9)
+}
+.testimonial.show {opacity: 1;transform: translateY(0);}
+.testimonial img {width: 28px;height: 28px;border-radius: 50%;object-fit: cover;}
+/* Accessibility focus */
+a, button, .buy { outline:none }
+a:focus-visible, button:focus-visible, .buy:focus-visible { outline:auto }
+/* Hide scrollbars for testimonials on mobile */
+@media (max-width:600px) {
+  #testimonials {left:auto;right:auto;width:auto;}
+  .testimonial {max-width:none;}
+  #visitor-counter {font-size:.95em;}
+  #telegram-btn {width:48px;height:48px;}
+  #telegram-btn svg {width:22px;height:22px;}
+}
+/* CSS Reset for better compatibility */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+/* Auth screens */
+#auth-bg {
+  position:absolute;
+  inset:0;
+  z-index:10000;
+  background:#090a17e6;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  min-width:100vw;
+  transition:.3s opacity cubic-bezier(.4,.2,.2,.9);
+}
+#porplelink-title {
+  margin-bottom:24px;
+  margin-top:0;
+  width:100vw;
+  text-align:center;
+  z-index:10001;
+  position:relative;
+  pointer-events:none;
+  user-select:none;
+}
+#porplelink-title span {
+  display:inline-block;
+  font-family:'Poppins',sans-serif;
+  font-size:clamp(38px,8vw,64px);
+  font-weight:900;
+  letter-spacing:-2px;
+  background:linear-gradient(90deg,#7C3AED,#23c4b0,#7C3AED);
+  background-size:200% auto;
+  color:transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  animation:gradient-move 2.5s linear infinite;
+  filter:drop-shadow(0 2px 12px #7C3AED88);
+}
+#porplelink-title .glow {
+  text-shadow:
+    0 0 16px #23c4b0,
+    0 0 32px #7C3AED99,
+    0 0 8px #23c4b088,
+    0 2px 12px #7C3AED55;
+}
+#porplelink-title .subtitle {
+  font-size:1.15em;
+  color:#b6eaff;
+  margin-top:.2em;
+  letter-spacing:.02em;
+  font-weight:500;
+  text-shadow:
+    0 2px 8px #18192a88,
+    0 0 4px #23c4b055;
+}
+@keyframes gradient-move { to { background-position:200% center; } }
+#auth-card {
+  background:#18192a;
+  border-radius:22px;
+  box-shadow:0 8px 32px rgba(10,10,30,.7);
+  padding:38px clamp(18vw,7vw,60vw) clamp(18vw,7vw,60vw) clamp(18vw,7vw,60vw);
+  min-width:min(340px,90vw);
+  max-width:min(380px,96vw);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:22px;
+  animation:.5s fadeIn cubic-bezier(.4,.2,.2,.9);
+}
+@keyframes fadeIn{from{opacity:.3}to{opacity:1}}
+#auth-card h2 {
+  font-family:Poppins,sans-serif;font-weight:bold;font-size:min(32px,7vw);margin-bottom:-10px;color:#fff;text-align:center
+}
+#auth-card form {
+  width:min(320px,90vw);
+  display:flex;
+  flex-direction:column;
+  gap:.9em
+}
+#auth-card input[type="text"],#auth-card input[type="password"]{
+  padding:.85em .9em;border-radius:.7em;border:none;background:#23243a;color:#fff;font-size:.98em;margin-bottom:.3em
+}
+#auth-card input[type="text"]:focus,#auth-card input[type="password"]:focus{outline:auto}
+#auth-card button{
+  padding:.85em;font-weight:bold;border-radius:.7em;background:#7C3AED;color:#fff;border:none;font-size:.98em;margin-top:.3em;cursor:pointer
+}
+#auth-card button:hover{background:#5f27cd}
+#auth-card .switch{ color:#aaa;font-size:.97em;margin-top:.5em;text-align:center }
+#auth-card .switch a{color:#7C3AED;text-decoration:none;font-weight:bold}
+#auth-card .switch a:hover{text-decoration:underline}
+#auth-error{ color:#90EE90;font-size:.97em;text-align:center;margin-bottom:-10px }
+#auth-error-reg{ color:#ef4444;font-size:.97em;text-align:center;margin-bottom:-10px }
+/* Hide main content when not logged in */
+body:not(.logged-in) .container,
+body:not(.logged-in) footer,
+body:not(.logged-in) #visitor-counter,
+body:not(.logged-in) #telegram-btn,
+body:not(.logged-in) #testimonials
+{display:none !important}
+body:not(.logged-in) #auth-bg{display:flex}
+body.logged-in #auth-bg{display:none !important}
+/* User menu */
+#user-menu{
+  position:absolute;top:.7em;left:.7em;background:#23243a;border-radius:.9em;padding:.5em .9em;color:#fff;font-size:.98em;font-weight:bold;z-index:99
+}
+#user-menu button{
+  background:none;border:none;color:#ef4444;font-weight:bold;margin-left:.7em;font-size:.98em;text-decoration:none;padding:.2em .5em;border-radius:.5em;cursor:pointer
+}
+#user-menu button:hover{background:#18192a}
+@media(max-width:500px){
+#auth-card{min-width:min(96vw);}
+#user-menu{font-size:.93em;padding:.35em .7em;}
+}
+</style>
 </head>
 <body>
 <!-- Auth overlay -->
 <div id="auth-bg">
- <div id="auth-card">
-   <h2 id="auth-title">Login</h2>
-   <form id="login-form" autocomplete="on">
-     <input type="text" id="login-user" placeholder="Username" required autocomplete="username">
-     <input type="password" id="login-pass" placeholder="Password" required autocomplete="current-password">
-     <div id="auth-error"></div>
-     <button type="submit">Login</button>
-     <div class="switch">Don't have an account? <a href="#" id="to-register">Register</a></div>
-   </form>
-   <form id="register-form" style="display:none" autocomplete="on">
-     <input type="text" id="reg-user" placeholder="Choose a username" required autocomplete="username">
-     <input type="password" id="reg-pass" placeholder="Choose a password" required autocomplete="new-password">
-     <input type="password" id="reg-pass2" placeholder="Repeat password" required autocomplete="new-password">
-     <div id="auth-error-reg"></div>
-     <button type="submit">Register</button>
-     <div class="switch">Already have an account? <a href="#" id="to-login">Login</a></div>
-   </form>
- </div>
+    <!-- PorpleLink Title with Effects (centralizado e simétrico) -->
+    <div id="porplelink-title">
+      <span>P</span><span>o</span><span>r</span><span>p</span><span>l</span><span>e</span>
+      <span class="glow">L</span><span class="glow">i</span><span class="glow">n</span><span class="glow">k</span>
+      <div class="subtitle">Secure access to your exclusive video experience</div>
+    </div>
+    <div id="auth-card">
+      <h2 id="auth-title">Login</h2>
+      <form id="login-form" autocomplete="on">
+        <input type="text" id="login-user" placeholder="Username" required autocomplete="username">
+        <input type="password" id="login-pass" placeholder="Password" required autocomplete="current-password">
+        <div id="auth-error"></div>
+        <button type="submit">Login</button>
+        <div class="switch">Don't have an account? <a href="#" id="to-register">Register</a></div>
+      </form>
+      <form id="register-form" style="display:none" autocomplete="on">
+        <input type="text" id="reg-user" placeholder="Choose a username" required autocomplete="username">
+        <input type="password" id="reg-pass" placeholder="Choose a password" required autocomplete="new-password">
+        <input type="password" id="reg-pass2" placeholder="Repeat password" required autocomplete="new-password">
+        <div id="auth-error-reg"></div>
+        <button type="submit">Register</button>
+        <div class="switch">Already have an account? <a href="#" id="to-login">Login</a></div>
+      </form>
+    </div>
 </div>
-
 <!-- User menu (logout) -->
 <div id="user-menu" style="display:none">
- Logged in as <span id="user-name"></span>
- <button id="logout-btn" title="Logout">Logout</button>
+    Logged in as <span id="user-name"></span>
+    <button id="logout-btn" title="Logout">Logout</button>
 </div>
-
 <div class="container">
 <header>
 <nav aria-label="Main navigation">
@@ -319,61 +316,51 @@
 <div class="trust">
 <img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal Secure" width="24" height="24" loading="lazy">
 <img src="https://img.icons8.com/color/48/000000/lock--v1.png" alt="Secure Site" width="24" height="24" loading="lazy">
-<span class="small">Pagamentos seguros via PayPal. Site protegido.</span>
+<span class="small">Secure payments via PayPal. Secure website.</span>
 </div>
 <div class="small">Security icons shown as visual trust. Payments fully handled by PayPal checkout.</div>
 </footer>
 </div>
-
 <!-- Visitor Counter -->
 <div id="visitor-counter" aria-live="polite">👥 <span id="count">1532</span> Online</div>
-
 <!-- Telegram Button -->
 <a id="telegram-btn" href="https://t.me/PorpleLink" target="_blank" aria-label="Contact on Telegram" rel="noopener noreferrer">
-<svg viewBox="0 0 24 24"><path d="M9.5 15.6l-.4 5.2c.6 0 .9-.3 1.2-.7l2.9-2.8 
-5.9 
-4.3c1 
-.5 
-1.7 
-.2 
-2-.9l3.6-16.9c.3-1.1-.4-1.5-1.2-1.2L1.7 
-10.1c-1.1.4-1.1 
-1-.2 
-1.3l5.5 
-1.7L19.1 
-5c.5-.3.9-.1.6.2"/></svg>
+<svg viewBox="0 0 24 24"><path d="M9.5 15.6l-.4 5.2c.6 0 .9-.3 1.2-.7l2.9-2.8 5.9 4.3c1 .5 1.7 .2 2-.9l3.6-16.9c.3-1.1-.4-1.5-1.2-1.2L1.7 10.1c-1.1.4-1.1 1-.2 1.3l5.5 1.7L19.1 5c.5-.3.9-.1.6.2"/></svg>
 </a>
-
 <!-- Testimonials -->
 <div id="testimonials"></div>
-
 <script>
 // Fake Visitor Counter (for demo)
 let count = parseInt(localStorage.getItem('visitorCount') || '1532',10);
-setInterval(()=>{ count+=Math.floor(Math.random()*3); document.getElementById("count").textContent=count; localStorage.setItem('visitorCount',count); },5000);
-
+setInterval(()=>{
+    count+=Math.floor(Math.random()*3);
+    document.getElementById("count").textContent=count;
+    localStorage.setItem('visitorCount',count);
+},5000);
 // Testimonials rotation (with accessibility)
 const testimonials = [
-{text:"Great service! Received my pack instantly.", img:"https://randomuser.me/api/portraits/men/32.jpg"},
-{text:"Fast PayPal checkout, very smooth.", img:"https://randomuser.me/api/portraits/women/45.jpg"},
-{text:"Highly recommended, worth it!", img:"https://randomuser.me/api/portraits/men/12.jpg"},
-{text:"Awesome quality videos!", img:"https://randomuser.me/api/portraits/women/26.jpg"}
+    {text:"Great service! Received my pack instantly.", img:"https://randomuser.me/api/portraits/men/32.jpg"},
+    {text:"Fast PayPal checkout, very smooth.", img:"https://randomuser.me/api/portraits/women/45.jpg"},
+    {text:"Highly recommended, worth it!", img:"https://randomuser.me/api/portraits/men/12.jpg"},
+    {text:"Awesome quality videos!", img:"https://randomuser.me/api/portraits/women/26.jpg"}
 ];
 let index = Math.floor(Math.random()*testimonials.length);
 function showTestimonial(){
- const t = testimonials[index];
- const div = document.createElement("div");
- div.className = "testimonial";
- div.setAttribute("role","status");
- div.innerHTML = `<img src="${t.img}" alt="" loading="lazy"><span>${t.text}</span>`;
- document.getElementById("testimonials").appendChild(div);
- setTimeout(()=>div.classList.add("show"),50);
- setTimeout(()=>{ div.classList.remove("show"); setTimeout(()=>div.remove(),500); },5000);
- index=(index+1)%testimonials.length;
+    const t = testimonials[index];
+    const div = document.createElement("div");
+    div.className = "testimonial";
+    div.setAttribute("role","status");
+    div.innerHTML = `<img src="${t.img}" alt="" loading="lazy"><span>${t.text}</span>`;
+    document.getElementById("testimonials").appendChild(div);
+    setTimeout(()=>div.classList.add("show"),50);
+    setTimeout(()=>{
+        div.classList.remove("show");
+        setTimeout(()=>div.remove(),500);
+    },5000);
+    index=(index+1)%testimonials.length;
 }
 setInterval(showTestimonial,6000);
 showTestimonial();
-
 // --- Auth logic ---
 const authBg = document.getElementById('auth-bg');
 const loginForm = document.getElementById('login-form');
@@ -386,112 +373,101 @@ const authErrorReg = document.getElementById('auth-error-reg');
 const userMenu = document.getElementById('user-menu');
 const userNameSpan = document.getElementById('user-name');
 const logoutBtn = document.getElementById('logout-btn');
-
 function getUsers(){
- try{
-   return JSON.parse(localStorage.getItem('users')||'{}');
- }catch(e){return {};}
+    try{ return JSON.parse(localStorage.getItem('users')||'{}'); }catch(e){return {};}
 }
 function setUsers(users){
- localStorage.setItem('users',JSON.stringify(users));
+    localStorage.setItem('users',JSON.stringify(users));
 }
 function setLoggedIn(user){
- localStorage.setItem('loggedInUser',user);
- document.body.classList.add('logged-in');
- userMenu.style.display='block';
- userNameSpan.textContent=user;
+    localStorage.setItem('loggedInUser',user);
+    document.body.classList.add('logged-in');
+    userMenu.style.display='block';
+    userNameSpan.textContent=user;
 }
 function logout(){
- localStorage.removeItem('loggedInUser');
- document.body.classList.remove('logged-in');
- userMenu.style.display='none';
+    localStorage.removeItem('loggedInUser');
+    document.body.classList.remove('logged-in');
+    userMenu.style.display='none';
 }
 function checkLoggedIn(){
- const user = localStorage.getItem('loggedInUser');
- if(user){
-   setLoggedIn(user);
- }else{
-   logout();
- }
+    const user = localStorage.getItem('loggedInUser');
+    if(user){ setLoggedIn(user); }else{ logout(); }
 }
 checkLoggedIn();
-
 // Switch forms
 toRegister.onclick = e => {
- e.preventDefault();
- loginForm.style.display='none';
- regForm.style.display='flex';
- authTitle.textContent='Register';
- authError.textContent='';
+    e.preventDefault();
+    loginForm.style.display='none';
+    regForm.style.display='flex';
+    authTitle.textContent='Register';
+    authError.textContent='';
 };
 toLogin.onclick = e => {
- e.preventDefault();
- regForm.style.display='none';
- loginForm.style.display='flex';
- authTitle.textContent='Login';
- authErrorReg.textContent='';
+    e.preventDefault();
+    regForm.style.display='none';
+    loginForm.style.display='flex';
+    authTitle.textContent='Login';
+    authErrorReg.textContent='';
 };
-
-// Register logic
+// Register logic (login obrigatório após registro)
 regForm.onsubmit = function(e){
- e.preventDefault();
- const user = regForm['reg-user'].value.trim();
- const pass = regForm['reg-pass'].value.trim();
- const pass2 = regForm['reg-pass2'].value.trim();
- if(!user || !pass || !pass2){
-   authErrorReg.textContent='Fill all fields.';
-   return false;
- }
- if(pass!==pass2){
-   authErrorReg.textContent='Passwords do not match.';
-   return false;
- }
- let users = getUsers();
- if(users[user]){
-   authErrorReg.textContent='Username already exists.';
-   return false;
- }
- users[user]=pass;
- setUsers(users);
- regForm.reset();
- authErrorReg.textContent='';
- // Auto-login after register
- setLoggedIn(user);
- checkLoggedIn();
- return false;
+    e.preventDefault();
+    const user = regForm['reg-user'].value.trim();
+    const pass = regForm['reg-pass'].value.trim();
+    const pass2 = regForm['reg-pass2'].value.trim();
+    if(!user || !pass || !pass2){
+        authErrorReg.textContent='Fill all fields.';
+        return false;
+    }
+    if(pass!==pass2){
+        authErrorReg.textContent='Passwords do not match.';
+        return false;
+    }
+    let users = getUsers();
+    if(users[user]){
+        authErrorReg.textContent='Username already exists.';
+        return false;
+    }
+    users[user]=pass;
+    setUsers(users);
+    regForm.reset();
+    authErrorReg.textContent='';
+    // Após registrar, volta para login (obrigatório login)
+    regForm.style.display='none';
+    loginForm.style.display='flex';
+    authTitle.textContent='Login';
+    authError.textContent='Account created successfully! Log in to continue.';
+    return false;
 };
-
 // Login logic
 loginForm.onsubmit = function(e){
- e.preventDefault();
- const user = loginForm['login-user'].value.trim();
- const pass = loginForm['login-pass'].value.trim();
- let users = getUsers();
- if(!users[user] || users[user]!==pass){
-   authError.textContent='Invalid username or password.';
-   return false;
- }
- loginForm.reset();
- authError.textContent='';
- setLoggedIn(user);
- checkLoggedIn();
- return false;
+    e.preventDefault();
+    const user = loginForm['login-user'].value.trim();
+    const pass = loginForm['login-pass'].value.trim();
+    let users = getUsers();
+    if(!users[user] || users[user]!==pass){
+        authError.textContent='Invalid username or password.';
+        return false;
+    }
+    loginForm.reset();
+    authError.textContent='';
+    setLoggedIn(user);
+    checkLoggedIn();
+    return false;
 };
-
 // Logout logic
 logoutBtn.onclick = function(){
- logout();
- location.reload();
+    logout();
+    location.reload();
 };
-
 // Show/hide user menu on login state
 if(localStorage.getItem('loggedInUser')){
- userMenu.style.display='block';
- userNameSpan.textContent=localStorage.getItem('loggedInUser');
+    userMenu.style.display='block';
+    userNameSpan.textContent=localStorage.getItem('loggedInUser');
 }else{
- userMenu.style.display='none';
+    userMenu.style.display='none';
 }
-
 </script>
 </body>
 </html>
