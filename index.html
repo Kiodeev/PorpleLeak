@@ -1,1 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entwickler Hub | Premium Mods</title>
+    <!-- Ícones -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <!-- Fontes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CORE VISUALS --- */
+        :root {
+            --primary: #ff003c;       /* Cyberpunk Red */
+            --primary-glow: rgba(255, 0, 60, 0.5);
+            --bg-dark: #050505;       /* Void Black */
+            --bg-card: #0f0f0f;       /* Surface */
+            --text-main: #e0e0e0;
+            --text-dim: #888;
+            --accent-blue: #00f3ff;   /* Cyan para detalhes */
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif; /* Fonte técnica */
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- BACKGROUND FX --- */
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px;
+            z-index: 999;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(5, 5, 5, 0.9);
+            border-bottom: 1px solid #222;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: white;
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+        .brand span { color: var(--primary); }
+
+        .nav-btn {
+            border: 1px solid var(--primary);
+            padding: 8px 25px;
+            color: var(--primary);
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+        .nav-btn:hover {
+            background: var(--primary);
+            color: black;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        /* --- HERO --- */
+        header {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #1a0000 0%, var(--bg-dark) 70%);
+        }
+
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            line-height: 1;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        
+        header p {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        .glitch-text {
+            position: relative;
+        }
+        /* Efeito simples de brilho */
+        .highlight { color: var(--primary); }
+
+        /* --- CATALOGO DE JOGOS (GRID) --- */
+        .catalog {
+            padding: 80px 5%;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 50px;
+            border-left: 5px solid var(--primary);
+            padding-left: 20px;
+        }
+        .section-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+        .section-header p { color: var(--text-dim); }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border: 1px solid #222;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: 0.4s ease;
+            position: relative;
+        }
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #222;
+            filter: grayscale(80%);
+            transition: 0.4s;
+        }
+        .game-card:hover .card-img { filter: grayscale(0%); }
+
+        .card-content { padding: 20px; }
+        
+        .card-badge {
+            background: #222;
+            color: var(--accent-blue);
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .game-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .features-list {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        .features-list li { margin-bottom: 5px; }
+        .features-list i { color: var(--primary); margin-right: 8px; width: 15px; }
+
+        .btn-download {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+        .btn-download:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: black;
+        }
+
+        /* --- ABOUT ME (THE CHEATER MINDSET) --- */
+        .about-section {
+            background: #0a0a0a;
+            padding: 100px 5%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 50px;
+            border-top: 1px solid #222;
+        }
+
+        .about-text { flex: 1; min-width: 300px; }
+        .about-visual { 
+            flex: 1; 
+            min-width: 300px; 
+            background: #111; 
+            height: 300px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            border: 1px solid var(--primary);
+            position: relative;
+        }
+        
+        /* Pseudo-console visual */
+        .terminal-text {
+            font-family: 'Courier New', monospace;
+            color: var(--primary);
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        .about-text h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        .quote {
+            border-left: 3px solid var(--primary);
+            padding-left: 20px;
+            font-style: italic;
+            color: var(--text-dim);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: black;
+            color: #444;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanlines"></div> <!-- Efeito visual de TV antiga -->
+
+    <!-- NAV -->
+    <nav>
+        <div class="brand">ENTWICKLER<span>.SYS</span></div>
+        <a href="#catalog" class="nav-btn">ACCESS DATABASE</a>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <h1>BREAK THE <span class="highlight">SYSTEM</span></h1>
+        <p>Ferramentas de precisão para quem se recusa a seguir as regras. Mod menus, trainers e exploits desenvolvidos para dominação total.</p>
+    </header>
+
+    <!-- CATALOGO -->
+    <section id="catalog" class="catalog">
+        <div class="section-header">
+            <h2>ARSENAL DISPONÍVEL</h2>
+            <p>Status do Servidor: <span style="color:var(--accent-blue)">ONLINE</span></p>
+        </div>
+
+        <div class="game-grid">
+            
+            <!-- CARD 1: RE4 -->
+            <div class="game-card">
+                <!-- SUBSTITUA O SRC ABAIXO PELA FOTO DO RE4 -->
+                <img src="https://placehold.co/600x400/330000/red?text=Resident+Evil+4" alt="RE4" class="card-img">
+                <div class="card-content">
+                    <span class="card-badge">V 2.0 UPDATE</span>
+                    <h3 class="game-title">Resident Evil 4</h3>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check"></i> Pesetas Infinitas</li>
+                        <li><i class="fa-solid fa-check"></i> Injeção de Memória</li>
+                        <li><i class="fa-solid fa-check"></i> Compatível Steam/Ubisoft</li>
+                    </ul>
+                    <a href="#" class="btn-download" onclick="alert('Download RE4 Iniciado')"><i class="fa-solid fa-download"></i> BAIXAR FERRAMENTA</a>
+                </div>
+            </div>
+
+            <!-- CARD 2: CS 1.6 -->
+            <div class="game-card">
+                <!-- SUBSTITUA O SRC ABAIXO PELA FOTO DO CS 1.6 -->
+                <img src="https://placehold.co/600x400/001a33/00f3ff?text=Counter-Strike+1.6" alt="CS 1.6" class="card-img">
+                <div class="card-content">
+                    <span class="card-badge">UNDETECTED</span>
+                    <h3 class="game-title">Counter-Strike 1.6</h3>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check"></i> Aimbot Silent</li>
+                        <li><i class="fa-solid fa-check"></i> Wallhack / ESP</li>
+                        <li><i class="fa-solid fa-check"></i> No-Recoil Script</li>
+                    </ul>
+                    <a href="#" class="btn-download" onclick="alert('Download CS Iniciado')"><i class="fa-solid fa-download"></i> BAIXAR FERRAMENTA</a>
+                </div>
+            </div>
+
+            <!-- CARD 3: TERRARIA -->
+            <div class="game-card">
+                <!-- SUBSTITUA O SRC ABAIXO PELA FOTO DO TERRARIA -->
+                <img src="https://placehold.co/600x400/003300/00FF41?text=Terraria" alt="Terraria" class="card-img">
+                <div class="card-content">
+                    <span class="card-badge">UTILITY</span>
+                    <h3 class="game-title">Terraria</h3>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check"></i> Item Spawner</li>
+                        <li><i class="fa-solid fa-check"></i> God Mode</li>
+                        <li><i class="fa-solid fa-check"></i> Map Revealer</li>
+                    </ul>
+                    <a href="#" class="btn-download" onclick="alert('Download Terraria Iniciado')"><i class="fa-solid fa-download"></i> BAIXAR FERRAMENTA</a>
+                </div>
+            </div>
+
+            <!-- CARD 4: NFS U2 -->
+            <div class="game-card">
+                <!-- SUBSTITUA O SRC ABAIXO PELA FOTO DO NFSU2 -->
+                <img src="https://placehold.co/600x400/330033/ff00ff?text=NFS+Underground+2" alt="NFSU2" class="card-img">
+                <div class="card-content">
+                    <span class="card-badge">UNLOCKER</span>
+                    <h3 class="game-title">NFS Underground 2</h3>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check"></i> Dinheiro Infinito</li>
+                        <li><i class="fa-solid fa-check"></i> Desbloquear Peças</li>
+                        <li><i class="fa-solid fa-check"></i> Instant Nitro</li>
+                    </ul>
+                    <a href="#" class="btn-download" onclick="alert('Download NFS Iniciado')"><i class="fa-solid fa-download"></i> BAIXAR FERRAMENTA</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SOBRE MIM (FILOSOFIA CHEATER) -->
+    <section class="about-section">
+        <div class="about-visual">
+            <div class="terminal-text" id="typewriter">
+                > CONNECTING TO ROOT...<br>
+                > ACCESS GRANTED.<br>
+                > DECOMPILING GAME ENGINE...<br>
+                > OFFSET FOUND: 0x3004B70<br>
+                > INJECTING PAYLOAD...<br>
+                > SUCCESS.
+            </div>
+        </div>
+        <div class="about-text">
+            <h2>POR TRÁS DO CÓDIGO</h2>
+            <p>
+                Jogos são apenas sistemas. E não existe sistema perfeito. 
+                Onde a maioria vê barreiras e "Game Over", eu vejo oportunidades e endereços de memória esperando para serem reescritos.
+            </p>
+            <p>
+                Eu sou o <strong>Entwickler</strong>. Não crio mods apenas para facilitar o jogo, mas para desbloquear o verdadeiro potencial que os desenvolvedores esconderam de você. Engenharia reversa não é crime, é arte.
+            </p>
+            <div class="quote">
+                "Por que gastar 100 horas farmando se eu posso mudar um valor hexadecimal em 2 segundos? O tempo é o único recurso que você não pode hackear. Use-o com sabedoria."
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Entwickler Mods. Use por sua conta e risco. Projetado para fins educacionais.</p>
+        <div style="margin-top: 10px;">
+            <i class="fa-brands fa-github" style="margin: 0 10px;"></i>
+            <i class="fa-brands fa-discord" style="margin: 0 10px;"></i>
+        </div>
+    </footer>
+
+</body>
+</html>
